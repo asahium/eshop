@@ -51,18 +51,19 @@
             <!-- Category Filter -->
             <div>
                 <h3>Categories:</h3>
-                <a href="?category=cloud">Cloud</a>
-                <a href="?category=jelly">Jelly</a>
-                <a href="?category=butter">Butter</a>
-                <!-- Add more category links as needed -->
+                <button class="categoryButton" onclick="filterProducts('')">All</button>
+                <button class="categoryButton" onclick="filterProducts('cloud')">Cloud</button>
+                <button class="categoryButton" onclick="filterProducts('jelly')">Jelly</button>
+                <button class="categoryButton" onclick="filterProducts('butter')">Butter</button>
+                <!-- Add more category buttons as needed -->
             </div>
 
             <!-- Popular Button -->
             <button onclick="showPopular()">Popular</button>
         </header>
-        <section class="tiles">
+        <section class="tiles" id="productTiles">
             <?php foreach($products as $product): ?>
-                <article>
+                <article class="productArticle">
                     <span class="image">
                         <img src="images/<?php echo $product['img']; ?>"/>
                     </span>
@@ -85,11 +86,12 @@
     // Function to show 6 random products for "Popular" button
     function showPopular() {
         var popularProducts = <?php echo json_encode(getRandomProducts($conn)); ?>;
-        var tilesSection = document.querySelector('#products .tiles');
-        tilesSection.innerHTML = '';
+        var productTiles = document.querySelector('#productTiles');
+        productTiles.innerHTML = '';
 
         popularProducts.forEach(function (product) {
             var article = document.createElement('article');
+            article.className = 'productArticle';
             article.innerHTML = `
                 <span class="image">
                     <img src="images/${product.img}">
@@ -101,7 +103,29 @@
                     </div>
                 </a>
             `;
-            tilesSection.appendChild(article);
+            productTiles.appendChild(article);
         });
     }
+
+    // Function to filter products by category
+    function filterProducts(category) {
+        var productTiles = document.querySelector('#productTiles');
+        var productArticles = document.querySelectorAll('.productArticle');
+
+        productArticles.forEach(function (article) {
+            var productCategory = article.querySelector('.content p').getAttribute('data-category');
+
+            if (category === '' || productCategory === category) {
+                article.style.display = 'block';
+            } else {
+                article.style.display = 'none';
+            }
+        });
+    }
+
+    // Initialize filter for initial category (if any)
+    window.onload = function() {
+        var initialCategory = '<?php echo $category; ?>';
+        filterProducts(initialCategory);
+    };
 </script>
