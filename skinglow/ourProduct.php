@@ -1,40 +1,42 @@
 <?php
-    require_once('config/config.php');
-    include_once('config/db.php');
+require_once('config/config.php');
+include_once('config/db.php');
 
-    // Get the search query if it's provided in the URL
-    $searchQuery = isset($_GET['q']) ? $_GET['q'] : '';
+// Get the search query if it's provided in the URL
+$searchQuery = isset($_GET['q']) ? $_GET['q'] : '';
 
-    // Get the category if it's provided in the URL
-    $category = isset($_GET['category']) ? $_GET['category'] : '';
+// Get the category if it's provided in the URL
+$category = isset($_GET['category']) ? $_GET['category'] : '';
 
-    // Build the search query
-    $query = "SELECT * FROM products";
+// Build the search query
+$query = "SELECT * FROM products";
 
-    // Add category filter
-    if (!empty($category) && $category !== 'all') {
-        $escapedCategory = mysqli_real_escape_string($conn, $category);
-        $query .= " WHERE ptype = '$escapedCategory'";
-    } elseif (!empty($searchQuery)) {
-        $escapedSearchQuery = mysqli_real_escape_string($conn, $searchQuery);
-        $query .= " WHERE pname LIKE '%$escapedSearchQuery%' OR pdesc LIKE '%$escapedSearchQuery%'";
-    }
+// Add category filter
+if (!empty($category) && $category !== 'all') {
+    $escapedCategory = mysqli_real_escape_string($conn, $category);
+    $query .= " WHERE ptype = '$escapedCategory'";
+} elseif (!empty($searchQuery)) {
+    $escapedSearchQuery = mysqli_real_escape_string($conn, $searchQuery);
+    $query .= " WHERE pname LIKE '%$escapedSearchQuery%' OR pdesc LIKE '%$escapedSearchQuery%'";
+}
 
+$result = mysqli_query($conn, $query);
+$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);
+
+// Function to get 6 random products for "Popular" button
+function getRandomProducts($conn)
+{
+    $query = "SELECT * FROM products ORDER BY RAND() LIMIT 6";
     $result = mysqli_query($conn, $query);
-    $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 
-    // Function to get 6 random products for "Popular" button
-    function getRandomProducts($conn) {
-        $query = "SELECT * FROM products ORDER BY RAND() LIMIT 6";
-        $result = mysqli_query($conn, $query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-
-    mysqli_close($conn);
+mysqli_close($conn);
 ?>
 
 <?php include('inc/header.php'); ?>
+
 <head>
     <title>Smile Slimes | Products</title>
 </head>
@@ -62,10 +64,10 @@
             <button onclick="showPopular()">Popular</button>
         </header>
         <section class="tiles" id="productTiles">
-            <?php foreach($products as $product): ?>
+            <?php foreach ($products as $product) : ?>
                 <article class="productArticle" data-category="<?php echo $product['ptype']; ?>">
                     <span class="image">
-                        <img src="images/<?php echo $product['img']; ?>"/>
+                        <img src="images/<?php echo $product['img']; ?>" />
                     </span>
                     <a href="<?php echo ROOT_URL; ?>product.php?id=<?php echo $product['id']; ?>">
                         <h2><?php echo $product['pname']; ?></h2>
@@ -89,7 +91,7 @@
         var productTiles = document.querySelector('#productTiles');
         productTiles.innerHTML = '';
 
-        popularProducts.forEach(function (product) {
+        popularProducts.forEach(function(product) {
             var article = document.createElement('article');
             article.className = 'productArticle';
             article.setAttribute('data-category', product.ptype);
@@ -113,7 +115,7 @@
         var productTiles = document.querySelector('#productTiles');
         var productArticles = document.querySelectorAll('.productArticle');
 
-        productArticles.forEach(function (article) {
+        productArticles.forEach(function(article) {
             var productCategory = article.getAttribute('data-category');
             var productName = article.querySelector('h2').innerText.toLowerCase();
             var productDescription = article.querySelector('.content p').innerText.toLowerCase();

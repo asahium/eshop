@@ -55,5 +55,3 @@ if(isset($_POST["submit"]) && !empty($_FILES["fileToUpload"]["name"])){
 // Display message
 echo $Msg;
 echo '<a href="AdminPage.php">Go Back</a>';
-
-?>
