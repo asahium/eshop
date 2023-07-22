@@ -12,7 +12,7 @@
     $query = "SELECT * FROM products";
 
     // Add category filter
-    if (!empty($category)) {
+    if (!empty($category) && $category !== 'all') {
         $escapedCategory = mysqli_real_escape_string($conn, $category);
         $query .= " WHERE ptype = '$escapedCategory'";
     } elseif (!empty($searchQuery)) {
@@ -51,7 +51,7 @@
             <!-- Category Filter -->
             <div>
                 <h3>Categories:</h3>
-                <button class="categoryButton" onclick="filterProducts('')">All</button>
+                <button class="categoryButton" onclick="filterProducts('all')">All</button>
                 <button class="categoryButton" onclick="filterProducts('cloud')">Cloud</button>
                 <button class="categoryButton" onclick="filterProducts('jelly')">Jelly</button>
                 <button class="categoryButton" onclick="filterProducts('butter')">Butter</button>
@@ -63,7 +63,7 @@
         </header>
         <section class="tiles" id="productTiles">
             <?php foreach($products as $product): ?>
-                <article class="productArticle">
+                <article class="productArticle" data-category="<?php echo $product['ptype']; ?>">
                     <span class="image">
                         <img src="images/<?php echo $product['img']; ?>"/>
                     </span>
@@ -92,6 +92,7 @@
         popularProducts.forEach(function (product) {
             var article = document.createElement('article');
             article.className = 'productArticle';
+            article.setAttribute('data-category', product.ptype);
             article.innerHTML = `
                 <span class="image">
                     <img src="images/${product.img}">
@@ -107,15 +108,17 @@
         });
     }
 
-    // Function to filter products by category
+    // Function to filter products by category or search query
     function filterProducts(category) {
         var productTiles = document.querySelector('#productTiles');
         var productArticles = document.querySelectorAll('.productArticle');
 
         productArticles.forEach(function (article) {
-            var productCategory = article.querySelector('.content p').getAttribute('data-category');
+            var productCategory = article.getAttribute('data-category');
+            var productName = article.querySelector('h2').innerText.toLowerCase();
+            var productDescription = article.querySelector('.content p').innerText.toLowerCase();
 
-            if (category === '' || productCategory === category) {
+            if (category === 'all' || productCategory === category || productName.includes(category.toLowerCase()) || productDescription.includes(category.toLowerCase())) {
                 article.style.display = 'block';
             } else {
                 article.style.display = 'none';
@@ -123,7 +126,7 @@
         });
     }
 
-    // Initialize filter for initial category (if any)
+    // Initialize filter for initial category or search query (if any)
     window.onload = function() {
         var initialCategory = '<?php echo $category; ?>';
         filterProducts(initialCategory);
