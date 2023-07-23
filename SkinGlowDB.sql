@@ -71,7 +71,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `pname`, `psize`, `price`, `ptype`,`pdesc`, `img`, `stock`, `type`) VALUES
+INSERT INTO `products` (`id`, `pname`, `psize`, `price`, `ptype`,`pdesc`, `img`, `stock`) VALUES
 (1, 'BEACH BREEZE', '200 ml', 11.99, 'cloud', 'Treat yourself to a summer paradise in your own home! Our Beach Breeze Slime features two textures of slime – jelly slime and butter slime for the perfect puffy texture once mixed! Plus, the beach theme is completed with sea shell charm & pool float charm! Scented carribean dream, a tropical fruit fragrance!', '1.jpg', 100),
 (2, 'SPACE CUBES', '200 ml', 11.99, 'jelly', 'Treat yourself to a truly out of this world experience with Space Cubes! Our jelly cube clear slime provides a cool color shifting effect with its purple, red, and blue hues - so its like traveling through a galaxy of stars every time you play! Plus, jelly cubes and an astronaut charm provide a perfect cosmic topping!', '2.jpg', 100),
 (3, 'SHARK GUMMY', '300 ml', 12.99, 'cloud', 'Say hello to Shark Gummy! Clear blue slime swirled with white ice-cream textured slime for extra waves of fun. Indulge in play with the unique texture & scented blue razz gummy scent! Mixes into an ultra soft cloud creme / jelly texture! Bring on the shark-tastic adventure!', '3.jpg', 100),
