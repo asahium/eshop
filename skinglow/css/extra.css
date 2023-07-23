@@ -5,13 +5,12 @@ body{
 
 .nav {
   overflow: hidden;
-  background-color: white ;
- 
+  background-color: pink ;
 
 }
 
 .nav a {
-  color: #585858;
+  color: white;
   margin: 20px 10px 10px 30px;
   text-align: center;
   padding: 14px 18px;
@@ -23,7 +22,7 @@ body{
 }
 
 .nav a:hover {
-  background-color: #585858;
+  background-color: lightpink;
 }
 
 

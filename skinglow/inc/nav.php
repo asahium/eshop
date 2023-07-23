@@ -10,7 +10,7 @@
 //then disply this nav bar 
 if (isset($_SESSION['id']) && $_SESSION['user_role']=='U'){ ?>
  <div class="nav">
-  <img class="logo-img" src="images/SkinGlow.png" width="185" height="165" ALIGN=CENTER>
+  <img class="logo-img" src="images/SmileSlime.png" width="185" height="165" ALIGN=CENTER>
       <nav>
 		
 		<a href="<?php echo ROOT_URL; ?>">Home</a>
@@ -26,7 +26,7 @@ if (isset($_SESSION['id']) && $_SESSION['user_role']=='U'){ ?>
 	//then disply this nav bar wich contain control panel for the Admin
 	elseif (isset($_SESSION['id']) && $_SESSION['user_role']=='A') { ?>
 	<div class="nav">
-  <img class="logo-img" src="images/SkinGlow.png" width="185" height="165" ALIGN=CENTER>
+  <img class="logo-img" src="images/SmileSlime.png" width="185" height="165" ALIGN=CENTER>
       <nav>
 		
 		<a href="<?php echo ROOT_URL; ?>">Home</a>
@@ -43,7 +43,7 @@ if (isset($_SESSION['id']) && $_SESSION['user_role']=='U'){ ?>
 	//then disply this nav bar 
 	?>
 	<div class="nav">
-    <img class="logo-img" src="images/SkinGlow.png" width="185" height="165" ALIGN=CENTER>
+    <img class="logo-img" src="images/SmileSlime.png" width="185" height="165" ALIGN=CENTER>
       <nav>
 		<a href="<?php echo ROOT_URL; ?>">Home</a>
 		<a href="<?php echo ROOT_URL; ?>ourProduct.php">Buy</a>

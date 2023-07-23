@@ -43,23 +43,24 @@
         <header>
             <h2>SMILE SLIMES</h2>
             <!-- Search Form -->
-            <form action="" method="get">
-                <input type="text" name="q" id="searchInput" placeholder="Enter your search query" value="<?php echo htmlspecialchars($searchQuery); ?>">
-                <button type="submit">Search</button>
+            <form action="" method="get" style="overflow: hidden;">
+                <input type="text" name="q" id="searchInput" placeholder="Enter your search query" value="<?php echo htmlspecialchars($searchQuery); ?>" style="float: left; width: calc(100% - 70px);">
+                <button type="submit" style="float: right;">Search</button>
             </form>
 
             <!-- Category Filter -->
             <div>
                 <h3>Categories:</h3>
-                <button class="categoryButton" onclick="filterProducts('all')">All</button>
+                <button onclick="showPopular()">I feel lucky</button>
                 <button class="categoryButton" onclick="filterProducts('cloud')">Cloud</button>
                 <button class="categoryButton" onclick="filterProducts('jelly')">Jelly</button>
                 <button class="categoryButton" onclick="filterProducts('butter')">Butter</button>
+                <button class="categoryButton" onclick="filterProducts('all')">All</button>
                 <!-- Add more category buttons as needed -->
             </div>
 
             <!-- Popular Button -->
-            <button onclick="showPopular()">Popular</button>
+            
         </header>
         <section class="tiles" id="productTiles">
             <?php foreach($products as $product): ?>
@@ -114,7 +115,7 @@
         var productArticles = document.querySelectorAll('.productArticle');
 
         productArticles.forEach(function (article) {
-            var productCategory = article.getAttribute('data-category');
+            var productCategory = article.getAttribute('ptype');
             var productName = article.querySelector('h2').innerText.toLowerCase();
             var productDescription = article.querySelector('.content p').innerText.toLowerCase();
 

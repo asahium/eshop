@@ -121,7 +121,7 @@ if(isset($_POST['product_id'], $_POST['quantity'])){
 									</div>
 									<div style="flex-grow: 1; height:90px;">
 									<input type="hidden" name="product_id" value="<?php echo $product['id'];?>">
-                                    <input type="submit" name="add_to_cart" style="height:50px; width:250px; font-size: 15px ;" value="Add To Bag">
+                                    <input type="submit" name="add_to_cart" style="height:50px; width:250px; font-size: 15px ;" value="Add To Cart">
 									</div>
 								</form>
 	

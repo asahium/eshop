@@ -90,36 +90,39 @@ $stmti->execute();
                                            
                                             <!-- add product redirect the proccess to upload.php -->
                                             <form id="addProd" action="upload.php" method="post" enctype="multipart/form-data" style="display:none" required>
-                                                <h3>Add new product</h3>
-                                                <div class="row gtr-uniform">
-                                                    <div class="col-6 col-12-xsmall">
-                                                        <input type="text" name="Pname" id="Pname" value="" placeholder="Product Name" required/>
-                                                    </div>
-                                                    <div class="col-6 col-12-xsmall">
-                                                        <input type="text"  pattern="[-+]?[0-9]*[.,]?[0-9]+" title="number only" name="Price" id="Price" value="" placeholder="Price" required/>
-                                                    </div>
-                                                    <div class="col-6 col-12-xsmall">
-                                                        <input type="text" name="Psize" id="Size" value="" placeholder="Size" required/>
-                                                    </div>
-                                                    <div class="col-6 col-12-xsmall">
-                                                        <input type="number" name="Amount" id="Amount" value="" placeholder="Amount" min="0" step="1" style="width: 7em" required/>
-                                                    </div>
-    
-                                                    <div class="col-6 col-12-xsmall">
-                                                            <label for="img">Select Product image:</label>
-                                                            <input type="file" name="fileToUpload" id="fileToUpload" required>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <textarea name="Pdesc" id="Pdesc" placeholder="Product description" rows="5" required></textarea>
-                                                    </div>
-                                                     <div class="col-12">
-                                                        <ul class="actions">
-                                                            <li><input type="submit" name="submit" value="Submit" class="primary" /></li>
-                                                            <li><input type="reset" value="Reset" /></li>
-                                                        </ul>
-                                                    </div>
+                                            <h3>Add new product</h3>
+                                            <div class="row gtr-uniform">
+                                                <div class="col-6 col-12-xsmall">
+                                                    <input type="text" name="Pname" id="Pname" value="" placeholder="Product Name" required/>
                                                 </div>
-                                            </form>
+                                                <div class="col-6 col-12-xsmall">
+                                                    <input type="text" pattern="[-+]?[0-9]*[.,]?[0-9]+" title="number only" name="Price" id="Price" value="" placeholder="Price" required/>
+                                                </div>
+                                                <div class="col-6 col-12-xsmall">
+                                                    <input type="text" name="Psize" id="Size" value="" placeholder="Size" required/>
+                                                </div>
+                                                <div class="col-6 col-12-xsmall">
+                                                    <input type="number" name="Amount" id="Amount" value="" placeholder="Amount" min="0" step="1" style="width: 7em" required/>
+                                                </div>
+                                                <div class="col-6 col-12-xsmall">
+                                                    <input type="text" name="Ptype" id="Ptype" value="" placeholder="Product Type" required/>
+                                                </div>
+                                                <div class="col-6 col-12-xsmall">
+                                                    <label for="img">Select Product image:</label>
+                                                    <input type="file" name="fileToUpload" id="fileToUpload" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <textarea name="Pdesc" id="Pdesc" placeholder="Product description" rows="5" required></textarea>
+                                                </div>
+                                                <div class="col-12">
+                                                    <ul class="actions">
+                                                        <li><input type="submit" name="submit" value="Submit" class="primary" /></li>
+                                                        <li><input type="reset" value="Reset" /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+
 
                                             <div id="showMsg" style="display:none">
                                             <h3>Show Messages from customers</h3>
