@@ -12,7 +12,7 @@
     $query = "SELECT * FROM products";
 
     // Add category filter
-    if (!empty($category)) {
+    if (!empty($category) && $category !== 'all') {
         $escapedCategory = mysqli_real_escape_string($conn, $category);
         $query .= " WHERE ptype = '$escapedCategory'";
     } elseif (!empty($searchQuery)) {
@@ -43,26 +43,28 @@
         <header>
             <h2>SMILE SLIMES</h2>
             <!-- Search Form -->
-            <form action="" method="get">
-                <input type="text" name="q" id="searchInput" placeholder="Enter your search query" value="<?php echo htmlspecialchars($searchQuery); ?>">
-                <button type="submit">Search</button>
+            <form action="" method="get" style="overflow: hidden;">
+                <input type="text" name="q" id="searchInput" placeholder="Enter your search query" value="<?php echo htmlspecialchars($searchQuery); ?>" style="float: left; width: calc(100% - 70px);">
+                <button type="submit" style="float: right;">Search</button>
             </form>
 
             <!-- Category Filter -->
             <div>
                 <h3>Categories:</h3>
-                <a href="?category=cloud">Cloud</a>
-                <a href="?category=jelly">Jelly</a>
-                <a href="?category=butter">Butter</a>
-                <!-- Add more category links as needed -->
+                <button onclick="showPopular()">I feel lucky</button>
+                <button class="categoryButton" onclick="filterProducts('cloud')">Cloud</button>
+                <button class="categoryButton" onclick="filterProducts('jelly')">Jelly</button>
+                <button class="categoryButton" onclick="filterProducts('butter')">Butter</button>
+                <button class="categoryButton" onclick="filterProducts('all')">All</button>
+                <!-- Add more category buttons as needed -->
             </div>
 
             <!-- Popular Button -->
-            <button onclick="showPopular()">Popular</button>
+            
         </header>
-        <section class="tiles">
+        <section class="tiles" id="productTiles">
             <?php foreach($products as $product): ?>
-                <article>
+                <article class="productArticle" data-category="<?php echo $product['ptype']; ?>">
                     <span class="image">
                         <img src="images/<?php echo $product['img']; ?>"/>
                     </span>
@@ -85,11 +87,13 @@
     // Function to show 6 random products for "Popular" button
     function showPopular() {
         var popularProducts = <?php echo json_encode(getRandomProducts($conn)); ?>;
-        var tilesSection = document.querySelector('#products .tiles');
-        tilesSection.innerHTML = '';
+        var productTiles = document.querySelector('#productTiles');
+        productTiles.innerHTML = '';
 
         popularProducts.forEach(function (product) {
             var article = document.createElement('article');
+            article.className = 'productArticle';
+            article.setAttribute('data-category', product.ptype);
             article.innerHTML = `
                 <span class="image">
                     <img src="images/${product.img}">
@@ -101,7 +105,31 @@
                     </div>
                 </a>
             `;
-            tilesSection.appendChild(article);
+            productTiles.appendChild(article);
         });
     }
+
+    // Function to filter products by category or search query
+    function filterProducts(category) {
+        var productTiles = document.querySelector('#productTiles');
+        var productArticles = document.querySelectorAll('.productArticle');
+
+        productArticles.forEach(function (article) {
+            var productCategory = article.getAttribute('ptype');
+            var productName = article.querySelector('h2').innerText.toLowerCase();
+            var productDescription = article.querySelector('.content p').innerText.toLowerCase();
+
+            if (category === 'all' || productCategory === category || productName.includes(category.toLowerCase()) || productDescription.includes(category.toLowerCase())) {
+                article.style.display = 'block';
+            } else {
+                article.style.display = 'none';
+            }
+        });
+    }
+
+    // Initialize filter for initial category or search query (if any)
+    window.onload = function() {
+        var initialCategory = '<?php echo $category; ?>';
+        filterProducts(initialCategory);
+    };
 </script>
