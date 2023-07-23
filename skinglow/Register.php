@@ -4,11 +4,8 @@ include_once('config/db.php');
 include('inc/header.php');
 ?>
 <?php
-//Coding For Signup
-//Input Validation/Sanitization
 if(isset($_POST['signup']))
 {
-	//Getting Psot Values 
 	$uname =htmlspecialchars ($_POST['uname']);
 	$fname =htmlspecialchars($_POST['fname']);
 	$lname = htmlspecialchars($_POST['lname']);
@@ -24,7 +21,6 @@ if(isset($_POST['signup']))
 	
 if ($password == $cpassword) {
 
-	//Checking email id exist for not
 	$check_email ="SELECT count(*) FROM users WHERE email=?";
 	$stmt = $conn->prepare($check_email);
 	$stmt->bind_param('s',$email);
@@ -33,16 +29,13 @@ if ($password == $cpassword) {
 	$stmt->fetch();
 	$stmt->close();
 
-	//if email already exist
 	if($count>0)
 	{
 		echo "<script>alert('Woops! Email Already Exists.')</script>";
 	} 
-	// If email not exist
 	else{
 
-	$password = md5($password);//encrypt the password before saving in the database
-	//prepared statment
+	$password = md5($password);
 	$query = "INSERT INTO users(uname, fname, lname, email, phone, address1, postcode, bday, country, gender, password,user_role)
 		VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?,'U')";
 	$stmti = $conn->prepare($query);
@@ -63,7 +56,6 @@ else {
 <head><title>Smile Slimes | Registeration</title></head>	
 				<div id="main">
 						<div class="inner">
-							<!-- Code for Registeration -->
                                     <div >
                                         <div class="container">
                                             <form action="" method="POST" class="login-email" >

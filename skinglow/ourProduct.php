@@ -84,7 +84,6 @@
 <?php include('inc/footer.php'); ?>
 
 <script>
-    // Function to show 6 random products for "Popular" button
     function showPopular() {
         var popularProducts = <?php echo json_encode(getRandomProducts($conn)); ?>;
         var productTiles = document.querySelector('#productTiles');
@@ -109,7 +108,6 @@
         });
     }
 
-    // Function to filter products by category or search query
     function filterProducts(category) {
         var productTiles = document.querySelector('#productTiles');
         var productArticles = document.querySelectorAll('.productArticle');
@@ -127,7 +125,6 @@
         });
     }
 
-    // Initialize filter for initial category or search query (if any)
     window.onload = function() {
         var initialCategory = '<?php echo $category; ?>';
         filterProducts(initialCategory);

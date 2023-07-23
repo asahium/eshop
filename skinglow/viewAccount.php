@@ -4,14 +4,13 @@ include_once('config/db.php');
 include('inc/header.php');?>
 
 <?php
-//session_start();
 if (isset($_SESSION["id"])) {
 	$id = $_SESSION['id'];
     $query = 'SELECT * FROM users WHERE id =?';
     $stmt = $conn->prepare($query);
     $stmt->bind_param('i', $id);
     $stmt->execute();
-    $result = $stmt->get_result(); // get the mysqli result
+    $result = $stmt->get_result(); 
     $users = $result->fetch_assoc();
 }
 ?>
@@ -22,7 +21,6 @@ if (isset($_SESSION["id"])) {
 <head>
 		<title>Smile Slimes |Profile</title>
 	</head>
-				<!-- Main -->
 					<div id="main">
 						<div class="inner">
                             <span class="image left"><img src="images/profileLogo.png" alt="profile logo" width="120" height="120"/></span>

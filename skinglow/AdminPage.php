@@ -6,16 +6,14 @@ include('inc/header.php');
 ?>
 
 <?php
-//check if SESSION id is set AND SESSION user role is ("A" ->Admin) then display admin info
 if (isset($_SESSION['id']) && $_SESSION['user_role']=="A") {
 	$id = $_SESSION['id'];
     $query = 'SELECT * FROM users WHERE id =?';
     $stmt = $conn->prepare($query);
     $stmt->bind_param('i', $id);
     $stmt->execute();
-    $result = $stmt->get_result(); // get the mysqli result
+    $result = $stmt->get_result();
     $user = $result->fetch_assoc();
-//otherwisr normal user DO NOT have access to this page
 }else{
     exit('<div class="inner" align="center" ><h2> you do not have access to this section </h2></div>');
 }
@@ -27,16 +25,13 @@ if (isset($_SESSION['id']) && $_SESSION['user_role']=="A") {
 
 
 <?php
-//admin delete product
 if(isset($_POST['deletepro'])){
-    // Get form data
 $delete_product_id=htmlspecialchars((int)$_POST['Pid']);
 
 $delete_query = "DELETE FROM products WHERE id=?";
 $stmti = $conn->prepare($delete_query);
 $stmti->bind_param('i',$delete_product_id);
 $stmti->execute();
-//$stmti->close();
 }
 
 ?>
@@ -49,8 +44,6 @@ $stmti->execute();
 		<title> Smile Slimes | Admin page</title>
 
 	</head>
- 
-				<!-- Main -->
 					<div id="main">
 						<div class="inner">
 							<h1>Welcome Admin <?php echo $user['fname']; ?></h1>
@@ -161,7 +154,6 @@ $stmti->execute();
                                                 </thead>
                                                 <tbody>
                                                 <?php
-                                                    //show all products name with id to the admin to choose one to delete
                                                 	$query = 'SELECT id,pname FROM products';
                                                     $result = mysqli_query($conn, $query); 
                                                     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);

@@ -3,7 +3,6 @@ require_once('config/config.php');
 include_once('config/db.php');
 include('inc/header.php');
 ?>
-				<!-- Main for reciving contact form -->
 				<head><title>Thank you!</title>
 
 			    </head>

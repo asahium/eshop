@@ -2,19 +2,16 @@
 require_once('config/config.php');
 include_once('config/db.php');
 
-// Get recent posts
 $recentPostsQuery = 'SELECT * FROM posts ORDER BY date_published DESC LIMIT 3';
 $recentPostsResult = mysqli_query($conn, $recentPostsQuery);
 $recentPosts = mysqli_fetch_all($recentPostsResult, MYSQLI_ASSOC);
 mysqli_free_result($recentPostsResult);
 
-// Get posts from specific categories (assuming "category" is a column in the "posts" table)
 $categoryQuery = 'SELECT DISTINCT category FROM posts LIMIT 3';
 $categoryResult = mysqli_query($conn, $categoryQuery);
 $categories = mysqli_fetch_all($categoryResult, MYSQLI_ASSOC);
 mysqli_free_result($categoryResult);
 
-// Close the database connection
 mysqli_close($conn);
 ?>
 
@@ -27,13 +24,10 @@ mysqli_close($conn);
 </head>
 
 <body>
-	<!-- Header -->
 	<?php include('inc/header.php'); ?>
 
-	<!-- Main Content -->
 	<div id="main">
 		<div class="inner" id="products">
-			<!-- Cover Page -->
 			<header>
 				<h2>SMILE SLIMES</h2>
 				<p>
@@ -43,7 +37,6 @@ mysqli_close($conn);
 				</p>
 			</header>
 
-			<!-- Product Features -->
 			<div class="box alt">
 				<div class="row gtr-uniform">
 					<div class="col-12">
@@ -79,42 +72,11 @@ mysqli_close($conn);
 			</div>
 
 
-			<!-- Show 3 Random Slimes -->
-			<div class="box">
-				<h2>Check out our Slimes!</h2>
-				<div class="row gtr-uniform">
-					<?php
-					// Get 3 random slimes from the products table
-					$randomSlimesQuery = 'SELECT * FROM products ORDER BY RAND() LIMIT 3';
-					$randomSlimesResult = mysqli_query($conn, $randomSlimesQuery);
-					$randomSlimes = mysqli_fetch_all($randomSlimesResult, MYSQLI_ASSOC);
 
-					foreach ($randomSlimes as $slime) :
-					?>
-						<div class="col-4">
-							<span class="image fit">
-								<img src="path/to/slimes/<?php echo htmlspecialchars($slime['img']); ?>" alt="<?php echo htmlspecialchars($slime['pname']); ?>">
-							</span>
-							<h3><?php echo htmlspecialchars($slime['pname']); ?></h3>
-							<p><?php echo htmlspecialchars($slime['pdesc']); ?></p>
-							<p>Price: $<?php echo number_format($slime['price'], 2); ?></p>
-						</div>
-					<?php endforeach; ?>
-
-					<?php
-					// Free result and close the database connection
-					mysqli_free_result($randomSlimesResult);
-					mysqli_close($conn);
-					?>
-				</div>
-			</div>
-
-			<!-- ... (rest of the content) ... -->
 
 		</div>
 	</div>
 
-	<!-- Footer -->
 	<?php include('inc/footer.php'); ?>
 
 </body>

@@ -3,22 +3,19 @@ require_once('config/config.php');
 include_once('config/db.php');
 include('inc/header.php');?>
 <?php
-   // session_start();
     if (isset($_SESSION["id"])) {
         $id = $_SESSION['id'];
-        // Use of prepared statement
         $query = 'SELECT * FROM users WHERE id =?';
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $id);
         $stmt->execute();
-        $result = $stmt->get_result(); // get the mysqli result
+        $result = $stmt->get_result();
         $user = $result->fetch_assoc();
     
     }      
     
 
     if(isset($_POST['update'])){
-        // Get form data //Input Validation/Sanitization
         $uname = htmlspecialchars($_POST['uname']);
         $fname = htmlspecialchars($_POST['fname']);
         $lname = htmlspecialchars($_POST['lname']);
@@ -30,7 +27,6 @@ include('inc/header.php');?>
         $country =htmlspecialchars( $_POST['country']);
         $gender =htmlspecialchars( $_POST['gender']);
 
-    // Use of prepared statement
 
     $query = "UPDATE users SET 
     uname =?,
@@ -57,12 +53,10 @@ include('inc/header.php');?>
 
 
 <head><title>Smile Slimes | Edit Profile</title></head>
-				<!-- Main -->
 					<div id="main">
 						<div class="inner">
                             <span class="image left"><img src="images/profileLogo.png" alt="profile logo" width="120" height="120"/></span>
 							<h1>Hi, <br><?php echo $user['fname']; ?></h1>
-							<!-- Code for profile -->
                             <h3>Edit my account</h3>
                                     <div >
                                         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
