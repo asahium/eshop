@@ -61,9 +61,6 @@ include('config/db.php');?>
 								</ul>
 
 							</section>
-							<ul class="copyright">
-								<li>&copy; All rights reserved</li>
-							</ul>
 						</div>
 
 					</footer>
