@@ -2,19 +2,16 @@
 	require_once('config/config.php');
 	include_once('config/db.php');
 
-	// Get recent posts
 	$recentPostsQuery = 'SELECT * FROM posts ORDER BY date_published DESC LIMIT 3';
 	$recentPostsResult = mysqli_query($conn, $recentPostsQuery);
 	$recentPosts = mysqli_fetch_all($recentPostsResult, MYSQLI_ASSOC);
 	mysqli_free_result($recentPostsResult);
 
-	// Get posts from specific categories (assuming "category" is a column in the "posts" table)
 	$categoryQuery = 'SELECT DISTINCT category FROM posts LIMIT 3';
 	$categoryResult = mysqli_query($conn, $categoryQuery);
 	$categories = mysqli_fetch_all($categoryResult, MYSQLI_ASSOC);
 	mysqli_free_result($categoryResult);
 
-	// Close the database connection
 	mysqli_close($conn);
 ?>
 
@@ -25,13 +22,10 @@
 		<link rel="stylesheet" href="path/to/your/css/style.css">
 	</head>
 	<body>
-		<!-- Header -->
 		<?php include('inc/header.php'); ?>
 
-		<!-- Main Content -->
 		<div id="main">
 			<div class="inner" id="products">
-				<!-- Cover Page -->
 				<header>
 					<h2>SMILE SLIMES</h2>
 					<p>
@@ -41,7 +35,6 @@
 					</p>
 				</header>
 
-				<!-- Product Features -->
 				<div class="box alt">
 					<div class="row gtr-uniform">
 						<div class="col-12">
@@ -76,7 +69,6 @@
 					</div>
 				</div>
 
-				<!-- Recent Posts -->
 				<div class="box">
 					<h2>Recent Posts</h2>
 					<?php foreach ($recentPosts as $post) : ?>
@@ -88,14 +80,12 @@
 					<?php endforeach; ?>
 				</div>
 
-				<!-- Posts from Specific Categories -->
 				<div class="box">
 					<h2>Posts from Specific Categories</h2>
 					<?php foreach ($categories as $category) : ?>
 						<h3><?php echo htmlspecialchars($category['category']); ?></h3>
 						<div class="post">
 							<?php
-							// Get posts for this specific category
 							$categoryName = $category['category'];
 							$categoryPostsQuery = "SELECT * FROM posts WHERE category = '$categoryName' LIMIT 3";
 							$categoryPostsResult = mysqli_query($conn, $categoryPostsQuery);
@@ -114,7 +104,6 @@
 			</div>
 		</div>
 
-		<!-- Footer -->
 		<?php include('inc/footer.php'); ?>
 
 	</body>

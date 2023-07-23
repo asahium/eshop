@@ -17,8 +17,6 @@ include_once('config/db.php');
 
 
 $total = 0.0;
-//Check if session id is set, meaning that the user CAN NOT view the cart unless he/she is logged in 
-//if set continou view the cart item
 if(isset($_SESSION['id'])){
     $user_id = $_SESSION['id'];
     $session_unique=$_SESSION['session_uniqeID'];
@@ -31,29 +29,25 @@ if(isset($_SESSION['id'])){
     
    
     if (!$rows) {
-        // Simple error to display if the id for the product doesn't exists (array is empty)
         
         
         exit('<div class="inner" align="center" ><h2> Cart Is Empty! </h2></div>');}
-//else if no set session id then user CAN NOT view the cart unless he/she is logged in
-//exit with disply this message
+
 }else{
     exit('<div class="inner" align="center" ><h2> Let\'s make sure you have the best user experience possible. Click the login button and let\'s get started on this fun journey together! 😊 </h2></div>');
 }
-// mysqli_close($conn);
+
 
 ?>
 
 
 <?php
-//Check for submit to remove item from the cart
+
 if(isset($_SESSION['id'],$_POST['delete'])){
     $user_id = $_SESSION['id'];
     $session_unique=$_SESSION['session_uniqeID'];
-    //Get form data
     $delete_id = $_POST['delete_id'];
-    //delete based in 3 things (user id, session_uniqeID, product_id) since the cart table is shared
-    // so we need to make sure that for the specific user id and spcific session_uniqeID which is the most important 
+    
     $query = "DELETE FROM cart WHERE session_uniqeID='$session_unique' AND product_id='$delete_id' AND user_id='$user_id'";
     if(mysqli_query($conn, $query)){
         header('Location: shoppingcart.php');
@@ -80,7 +74,7 @@ if(isset($_SESSION['id'],$_POST['delete'])){
 								<th>Item</th>
                                 <th>Quantity</th>
 								<th>Price</th>
-                                <!-- <th align='right'>Remove</th> -->
+    
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -91,7 +85,7 @@ if(isset($_SESSION['id'],$_POST['delete'])){
 								<td name="item"><?php echo $row['itemname']; ?></td>
                                 <td name="quantity"><?php echo $row['quantity']; ?></td>
 								<td  name="price"><?php echo $row['price']*$row['quantity']." SAR";?></td>
-                                <!-- calculate total for each item -->
+    
                                 <?php $total = $total +  ($row['price'] * $row['quantity']);?>                                      
                                 <td align='right' >
                                     <form  method="POST" action="">
