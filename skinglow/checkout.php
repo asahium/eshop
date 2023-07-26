@@ -26,7 +26,7 @@ if (!isset($_SESSION['id'])){
 		<?php }
 	
 		    unset($_SESSION['session_uniqeID']);
-			$randomnum=date('YmdHis')*2; // >100
+			$randomnum=date('YmdHis')*2;
 			$rand=substr($randomnum, 5);
 			$_SESSION['session_uniqeID']=$rand;
 		

@@ -77,7 +77,7 @@ $stmti->execute();
                                             <ul class="actions fit">
                                                 <li><button class="button fit" onclick="addProduct()">Add Product</button></li>
                                                 <li><button class="button fit" onclick="deleteProduct()">Delete Product</button></li>
-                                                <li><button class="button fit" onclick="showMsg()">View Messages</button></li>
+                                                <li><button class="button fit" onclick="showMsg()">View Orders</button></li>
                                             </ul>
 											</div>
                                            

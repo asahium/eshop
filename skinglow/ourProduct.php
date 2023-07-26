@@ -1,17 +1,9 @@
 <?php
     require_once('config/config.php');
     include_once('config/db.php');
-
-    // Get the search query if it's provided in the URL
     $searchQuery = isset($_GET['q']) ? $_GET['q'] : '';
-
-    // Get the category if it's provided in the URL
     $category = isset($_GET['category']) ? $_GET['category'] : '';
-
-    // Build the search query
     $query = "SELECT * FROM products";
-
-    // Add category filter
     if (!empty($category) && $category !== 'all') {
         $escapedCategory = mysqli_real_escape_string($conn, $category);
         $query .= " WHERE ptype = '$escapedCategory'";
@@ -23,8 +15,6 @@
     $result = mysqli_query($conn, $query);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
-
-    // Function to get 6 random products for "Popular" button
     function getRandomProducts($conn) {
         $query = "SELECT * FROM products ORDER BY RAND() LIMIT 6";
         $result = mysqli_query($conn, $query);
@@ -42,13 +32,10 @@
     <div class="inner" id="products">
         <header>
             <h2>SMILE SLIMES</h2>
-            <!-- Search Form -->
             <form action="" method="get" style="overflow: hidden;">
                 <input type="text" name="q" id="searchInput" placeholder="Enter your search query" value="<?php echo htmlspecialchars($searchQuery); ?>" style="float: left; width: calc(100% - 70px);">
                 <button type="submit" style="float: right;">Search</button>
             </form>
-
-            <!-- Category Filter -->
             <div>
                 <h3>Categories:</h3>
                 <button onclick="showPopular()">I feel lucky</button>
@@ -56,11 +43,7 @@
                 <button class="categoryButton" onclick="filterProducts('jelly')">Jelly</button>
                 <button class="categoryButton" onclick="filterProducts('butter')">Butter</button>
                 <button class="categoryButton" onclick="filterProducts('all')">All</button>
-                <!-- Add more category buttons as needed -->
             </div>
-
-            <!-- Popular Button -->
-            
         </header>
         <section class="tiles" id="productTiles">
             <?php foreach($products as $product): ?>

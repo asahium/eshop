@@ -3,22 +3,10 @@ include_once('config/config.php');
 include('config/db.php');?>
 
 <?php
-    // Check for submit (form)
     if(isset($_POST['submit'])){
-
-
-        // Get form data 
-		//input validation and Sanitizing //converts special characters to HTML entities
-
     $name =htmlspecialchars($_POST['name']);
     $email =htmlspecialchars($_POST['email']);
     $message = htmlspecialchars($_POST['message']);
-		
-
-
-		//Use prepared statements
-		//strong protection against SQL injection,
-		//parameter values are not embedded directly inside the SQL query string.
 		$sql_query="INSERT INTO contact(name, email, message) VALUES(?,?,?)";
 		$stmt = $conn->prepare($sql_query);
 		$stmt->bind_param('sss', $name, $email, $message);
@@ -61,9 +49,6 @@ include('config/db.php');?>
 								</ul>
 
 							</section>
-							<ul class="copyright">
-								<li>&copy; All rights reserved</li>
-							</ul>
 						</div>
 
 					</footer>
