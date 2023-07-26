@@ -20,7 +20,7 @@ include('config/db.php');?>
 				<footer id="footer">
 						<div class="inner">
 							<section id="contact">
-								<h2>Get in touch</h2>
+								<h2>Leave a message</h2>
 
 								<form method="POST" action="">
 									<div class="fields">

@@ -52,7 +52,7 @@ if(isset($_POST['product_id'], $_POST['quantity'])){
 				}
 
 }else{
-    exit('<div class="inner" align="center" ><h2> you need to login first in order to add to the cart! </h2></div>');
+    exit('<div class="inner" align="center" ><h2> Let\'s get you logged in first so you can start adding items to your cart! </h2></div>');
 
    }
 }
