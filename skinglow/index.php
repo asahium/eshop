@@ -45,25 +45,26 @@ mysqli_close($conn);
 						</span>
 					</div>
 					<div class="col-12">
-						<h3>Unmatched Variety:</h3>
+						<h2>Why Smile Slime?</h2>
+						<h3>➡Unmatched Variety:</h3>
 						<p>From the soothing pastel hues to the vibrant neon shades, our selection of slimes knows no bounds. Choose from a delightful assortment of scents, textures, and appearances, making every slime unique and captivating.</p>
 
-						<h3>Premium Quality:</h3>
+						<h3>➡Premium Quality:</h3>
 						<p>At Smile Slime, quality is our utmost priority. Each slime is meticulously crafted using the finest, non-toxic ingredients to ensure a safe and enjoyable playtime experience for kids and adults alike.</p>
 
-						<h3>Imaginative Themes:</h3>
+						<h3>➡Imaginative Themes:</h3>
 						<p>Get ready to embark on a whimsical journey as our slimes come in an assortment of magical themes. From enchanted forests to cosmic galaxies, our slime creations are sure to spark your imagination.</p>
 
-						<h3>Stress-Relief Guaranteed:</h3>
+						<h3>➡Stress-Relief Guaranteed:</h3>
 						<p>Squeeze, stretch, and squish your way to tranquility with our stress-relieving slimes. Whether you need a moment of relaxation after a long day or a fidget tool to keep your hands busy, Smile Slime has got you covered.</p>
 
-						<h3>Gift-Giving Made Magical:</h3>
+						<h3>➡Gift-Giving Made Magical:</h3>
 						<p>Looking for a unique and delightful gift? Smile Slime offers the perfect present for birthdays, celebrations, or simply to put a smile on someone's face. Our slimes are gifts that keep on giving joy!</p>
 
-						<h3>Eco-Friendly Packaging:</h3>
+						<h3>➡Eco-Friendly Packaging:</h3>
 						<p>We care for our planet just as much as we care for our customers. Our slimes are packed in eco-friendly materials, reducing our environmental footprint one slime at a time.</p>
 
-						<h3>Exceptional Customer Service:</h3>
+						<h3>➡Exceptional Customer Service:</h3>
 						<p>Your satisfaction is our ultimate goal. Our dedicated customer support team is here to assist you with any inquiries or concerns, ensuring your shopping experience at Smile Slime is nothing short of delightful.</p>
 
 						<input type="button" class="button fit" onclick="location.href='ourProduct.php';" value="Check out our Slimes!" />
